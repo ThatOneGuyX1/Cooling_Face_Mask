@@ -1,0 +1,30 @@
+#define ambeint A0 // Thermoresitor for the hot side.
+
+#define forehead A1 // Theremoresitor for the cold side
+void setup()
+{
+  pinMode(2, OUTPUT); // The output pin that will control the transitors
+}
+
+void loop()
+{
+    int ambinetTemp; // The value of the hot side
+
+    int cooledTemp; // Value of the cold side
+
+    int tempDif; // The difference of the two
+
+    ambinetTemp = analogRead(ambeint); // Get value from the ADC
+    cooledTemp = analogRead(forehead); // Get the calue from the ADV
+
+    tempDif = ambinetTemp- cooledTemp; // Cool math to solve the differnece
+  
+    if (tempDif < 500){ // Check to see if hte difference is above the threshold
+  	    digitalWrite(2, HIGH); // Set high output
+        delay(1000);
+    }
+  else{ // Turn off
+  	digitalWrite(2, LOW);
+    delay(1000);
+  }
+}
